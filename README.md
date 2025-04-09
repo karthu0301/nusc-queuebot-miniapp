@@ -2,21 +2,8 @@
 The repository to hold the NUSC Telegram queuebot project as a native Telegram mini app in React + TypeScript. Previously written in Golang + Postgres at https://github.com/josh1248/telegram-queue-bot .
 
 
-# Welcome to your Lovable project
-
-## Project info
-
-**URL**: https://lovable.dev/projects/3a89a525-2cb1-4610-9749-12aa4442e1d1
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/3a89a525-2cb1-4610-9749-12aa4442e1d1) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
+## environment variables
+The required environment variables are written within the `.envTemplate` file. The actual strings have been hidden for security reasons.
 
 **Use your preferred IDE**
 
