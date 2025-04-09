@@ -16,80 +16,36 @@ import {
   DialogTrigger
 } from "../components/ui/dialog";
 
-interface TelegramWebAppProps {
-  className?: string;
-}
+import { useInitData } from '@vkruglikov/react-telegram-web-app';
 
-// Check if running inside Telegram WebApp
-const isTelegramWebApp = () => {
-  return window.Telegram && window.Telegram.WebApp;
+type UserData = {
+  user?: {
+    id: number,
+    is_bot?: boolean,
+    first_name: string,
+    last_name?: string,
+    username?: string,
+    language_code?: string
+  },
+  chat_type?: string,
+  chat?: object,
+  start_param?: string,
+  auth_date?: number,
+  hash: string
 };
 
-export const TelegramWebApp: React.FC<TelegramWebAppProps> = ({ className }) => {
+export const TelegramWebApp = () => {
   const [isInitialized, setIsInitialized] = useState(false);
-  const [userName, setUserName] = useState<string>("");
-
-  useEffect(() => {
-    // Initialize Telegram WebApp
-    if (isTelegramWebApp()) {
-      const webApp = window.Telegram.WebApp;
-      
-      // Set background color
-      webApp.expand();
-      webApp.ready();
-
-      // Get user data if available
-      if (webApp.initDataUnsafe && webApp.initDataUnsafe.user) {
-        const user = webApp.initDataUnsafe.user;
-        const fullName = [user.first_name, user.last_name].filter(Boolean).join(" ");
-        setUserName(fullName || user.username || "");
-      }
-
-      setIsInitialized(true);
-      
-      // Request notification permission
-      if ("Notification" in window && Notification.permission !== "granted") {
-        Notification.requestPermission().then(permission => {
-          if (permission === "granted") {
-            toast.success("Notifications enabled!");
-          }
-        });
-      }
-    } else {
-      setIsInitialized(true);
-      
-      // For testing outside of Telegram
-      setTimeout(() => {
-        toast.info("Running outside Telegram WebApp", {
-          description: "Some features might be limited",
-          duration: 3000,
-        });
-      }, 1000);
-    }
-  }, []);
-
-  if (!isInitialized) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-center">
-          <h2 className="text-xl font-medium mb-2">Initializing...</h2>
-          <p className="text-muted-foreground">Setting up TeleQueue</p>
-        </div>
-      </div>
-    );
-  }
+  const [userDetails, alt] = useInitData();
 
   return (
     <QueueProvider>
-      <div className={`max-w-md mx-auto p-4 ${className || ""}`}>
+      <div className={`max-w-md mx-auto p-4`}>
         <header className="flex justify-between items-center mb-6">
           <div>
             <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
-              TeleQueue
+              Hello, @{userDetails?.user?.username ?? 'loading...'}
             </h1>
-            <p className="text-sm text-muted-foreground">
-              Smart queue management
-            </p>
           </div>
           <Dialog>
             <DialogTrigger asChild>
@@ -107,7 +63,7 @@ export const TelegramWebApp: React.FC<TelegramWebAppProps> = ({ className }) => 
               <div className="space-y-2 text-sm">
                 <h4 className="font-medium">How to use:</h4>
                 <ol className="list-decimal list-inside space-y-1">
-                  <li>Enter your name and join the queue</li>
+                  <li>Join the queue!</li>
                   <li>Set when you want to be notified</li>
                   <li>Wait for your turn</li>
                   <li>You'll be notified when your turn is approaching</li>
@@ -125,10 +81,6 @@ export const TelegramWebApp: React.FC<TelegramWebAppProps> = ({ className }) => 
           <QueueActions />
           <QueueAdmin />
         </div>
-
-        <footer className="mt-8 text-center text-xs text-muted-foreground">
-          <p>© 2025 TeleQueue - Beautiful queue management for Telegram</p>
-        </footer>
       </div>
     </QueueProvider>
   );

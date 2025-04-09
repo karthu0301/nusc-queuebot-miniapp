@@ -1,6 +1,8 @@
 # nusc-queuebot-miniapp
 The repository to hold the NUSC Telegram queuebot project as a native Telegram mini app in React + TypeScript. Previously written in Golang + Postgres at https://github.com/josh1248/telegram-queue-bot .
 
+The API of choice to communicate with Telegram is via @vkruglikov/react-telegram-web-app.
+
 
 ## environment variables
 The required environment variables are written within the `.envTemplate` file. The actual strings have been hidden for security reasons.
