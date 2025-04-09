@@ -8,18 +8,8 @@ export default defineConfig(({ mode }) => {
   process.env = {...process.env, ...loadEnv(mode, process.cwd())};
   return {
     server: {
-      port: parseInt(process.env.PORT || '80'),
-      path: '',
-    },
-    plugins: [
-      react(),
-      mode === 'development' &&
-      componentTagger(),
-    ].filter(Boolean),
-    resolve: {
-      alias: {
-        "@": path.resolve(__dirname, "./src"),
-      },
+      host: process.env.VITE_HOST,
+      port: process.env.PORT ? parseInt(process.env.PORT) : 3000,
     },
   };
 });
