@@ -8,8 +8,7 @@ export default defineConfig(({ mode }) => {
   process.env = {...process.env, ...loadEnv(mode, process.cwd())};
   return {
     server: {
-      host: process.env.VITE_HOST,
-      port: parseInt(process.env.PORT || '8080'),
+      port: parseInt(process.env.PORT || '80'),
       path: '',
     },
     plugins: [
