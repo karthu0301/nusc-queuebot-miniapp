@@ -28,7 +28,7 @@ export const TelegramWebApp = () => {
         <header className="flex justify-between items-center mb-6">
           <div>
             <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
-              Hello, @{initData.user?.id ?? 'loading...'}
+              Hello, @{initData?.user?.id ?? 'loading...'}
             </h1>
           </div>
           <Dialog>
