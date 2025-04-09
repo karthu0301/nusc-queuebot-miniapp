@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: JSON.stringify(process.env.CLOUD_HOST),
     port: 8080,
+    path: '',
   },
   plugins: [
     react(),
