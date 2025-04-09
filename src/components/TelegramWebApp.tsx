@@ -56,7 +56,6 @@ export const TelegramWebApp: React.FC<TelegramWebAppProps> = ({ className }) => 
         });
       }
     } else {
-      console.log("Not running in Telegram WebApp");
       setIsInitialized(true);
       
       // For testing outside of Telegram
