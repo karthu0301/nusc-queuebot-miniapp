@@ -1,4 +1,7 @@
 # https://vite.dev/guide/env-and-mode
 # Vite environment variables are to be prefixed with "VITE_" before it is visible.
-# 0.0.0.0 to allow all hosts.
+# 0.0.0.0 to allow all hosts to send requests to it.
 VITE_HOST=0.0.0.0
+
+# cloud deployment - determines which requests sent are allowed (in this case, the cloud domain)
+VITE_CLOUD_HOST=

@@ -11,5 +11,10 @@ export default defineConfig(({ mode }) => {
       host: process.env.VITE_HOST,
       port: process.env.PORT ? parseInt(process.env.PORT) : 3000,
     },
+    preview: {
+      allowedHosts: [
+        process.env.VITE_CLOUD_HOST ?? '',
+      ],
+    },
   };
 });
