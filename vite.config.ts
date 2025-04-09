@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
   return {
     server: {
       host: process.env.VITE_HOST,
-      port: 8080,
+      port: parseInt(process.env.PORT || '8080'),
       path: '',
     },
     plugins: [
