@@ -18,25 +18,9 @@ import {
 
 import { useInitData } from '@vkruglikov/react-telegram-web-app';
 
-type UserData = {
-  user?: {
-    id: number,
-    is_bot?: boolean,
-    first_name: string,
-    last_name?: string,
-    username?: string,
-    language_code?: string
-  },
-  chat_type?: string,
-  chat?: object,
-  start_param?: string,
-  auth_date?: number,
-  hash: string
-};
-
 export const TelegramWebApp = () => {
   const [isInitialized, setIsInitialized] = useState(false);
-  const [userDetails, alt] = useInitData();
+  const [initData, initDataUnsafe] = useInitData();
 
   return (
     <QueueProvider>
@@ -44,7 +28,7 @@ export const TelegramWebApp = () => {
         <header className="flex justify-between items-center mb-6">
           <div>
             <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
-              Hello, @{userDetails?.user?.username ?? 'loading...'}
+              Hello, @{initData.user?.id ?? 'loading...'}
             </h1>
           </div>
           <Dialog>
