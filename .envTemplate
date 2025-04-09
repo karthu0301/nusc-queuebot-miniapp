@@ -1,4 +1,4 @@
 # https://vite.dev/guide/env-and-mode
 # Vite environment variables are to be prefixed with "VITE_" before it is visible.
-# 127.0.0.1 for local host, other website (without leading https) for cloud host.
-VITE_HOST=127.0.0.1
+# 0.0.0.0 to allow all hosts.
+VITE_HOST=0.0.0.0
