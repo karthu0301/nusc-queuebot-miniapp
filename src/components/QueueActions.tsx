@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { useQueue } from "@/contexts/QueueContext";
+import { useQueue } from "../contexts/QueueContext";
 import {
   Card,
   CardContent,
@@ -8,10 +8,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "../components/ui/card";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
 import { Loader2, LogIn, LogOut, Bell } from "lucide-react";
 import {
   Select,
@@ -19,7 +19,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "../components/ui/select";
 
 export const QueueActions: React.FC = () => {
   const { joinQueue, leaveQueue, isInQueue, userPosition, notifyAt, setNotificationThreshold } = useQueue();

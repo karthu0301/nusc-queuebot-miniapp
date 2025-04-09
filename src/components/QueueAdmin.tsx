@@ -1,6 +1,6 @@
 
 import React from "react";
-import { useQueue } from "@/contexts/QueueContext";
+import { useQueue } from "../contexts/QueueContext";
 import {
   Card,
   CardContent,
@@ -8,11 +8,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+} from "../components/ui/card";
+import { Button } from "../components/ui/button";
 import { ChevronRight, Shield } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
+import { Switch } from "../components/ui/switch";
+import { Label } from "../components/ui/label";
 
 export const QueueAdmin: React.FC = () => {
   const { nextInQueue, currentPosition, isAdmin, setIsAdmin } = useQueue();

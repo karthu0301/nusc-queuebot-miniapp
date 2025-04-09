@@ -1,10 +1,10 @@
 
 import React, { useEffect, useState } from "react";
-import { QueueProvider } from "@/contexts/QueueContext";
-import { QueueDisplay } from "@/components/QueueDisplay";
-import { QueueActions } from "@/components/QueueActions";
-import { QueueAdmin } from "@/components/QueueAdmin";
-import { Button } from "@/components/ui/button";
+import { QueueProvider } from "../contexts/QueueContext";
+import { QueueDisplay } from "../components/QueueDisplay";
+import { QueueActions } from "../components/QueueActions";
+import { QueueAdmin } from "../components/QueueAdmin";
+import { Button } from "../components/ui/button";
 import { Info } from "lucide-react";
 import { toast } from "sonner";
 import { 
@@ -14,7 +14,7 @@ import {
   DialogHeader, 
   DialogTitle,
   DialogTrigger
-} from "@/components/ui/dialog";
+} from "../components/ui/dialog";
 
 interface TelegramWebAppProps {
   className?: string;

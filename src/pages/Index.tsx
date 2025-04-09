@@ -1,5 +1,5 @@
 
-import { TelegramWebApp } from "@/components/TelegramWebApp";
+import { TelegramWebApp } from "../components/TelegramWebApp";
 
 // Declare global Telegram WebApp interfaces 
 declare global {

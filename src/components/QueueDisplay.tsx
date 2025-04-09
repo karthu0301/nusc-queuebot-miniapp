@@ -1,9 +1,9 @@
 
 import React from "react";
-import { useQueue } from "@/contexts/QueueContext";
-import { Motion } from "@/components/ui/motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { useQueue } from "../contexts/QueueContext";
+import { Motion } from "../components/ui/motion";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
 import { Clock, Users } from "lucide-react";
 
 export const QueueDisplay: React.FC = () => {
