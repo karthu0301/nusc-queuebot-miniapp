@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { QueueProvider } from "../contexts/QueueContext";
 import { QueueDisplay } from "../components/QueueDisplay";
@@ -7,11 +6,11 @@ import { QueueAdmin } from "../components/QueueAdmin";
 import { Button } from "../components/ui/button";
 import { Info } from "lucide-react";
 import { toast } from "sonner";
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogDescription, 
-  DialogHeader, 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
   DialogTitle,
   DialogTrigger
 } from "../components/ui/dialog";
@@ -19,7 +18,7 @@ import {
 import { useInitData } from '@vkruglikov/react-telegram-web-app';
 
 export const TelegramWebApp = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>(null);
   const [initData, initDataUnsafe] = useInitData();
 
   useEffect(() => {
@@ -30,11 +29,11 @@ export const TelegramWebApp = () => {
 
   return (
     <QueueProvider>
-      <div className={`max-w-md mx-auto p-4`}>
+      <div className="max-w-md mx-auto p-4">
         <header className="flex justify-between items-center mb-6">
           <div>
             <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
-              Hello, @{user?.id ?? 'loading...'}
+              Hello, @{user?.username || user?.id || 'loading...'}
             </h1>
           </div>
           <Dialog>
@@ -68,7 +67,7 @@ export const TelegramWebApp = () => {
 
         <div className="space-y-6">
           <QueueDisplay />
-          <QueueActions />
+          <QueueActions user={user} /> {/* <-- pass user down here */}
           <QueueAdmin />
         </div>
       </div>

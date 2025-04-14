@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useQueue } from "../contexts/QueueContext";
 import {
@@ -10,34 +9,28 @@ import {
   CardTitle,
 } from "../components/ui/card";
 import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
-import { Loader2, LogIn, LogOut, Bell } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../components/ui/select";
 
-export const QueueActions: React.FC = () => {
+type QueueActionsProps = {
+  user: any;
+};
+
+export const QueueActions = ({ user }: QueueActionsProps) => {
   const { joinQueue, leaveQueue, isInQueue, userPosition, notifyAt, setNotificationThreshold } = useQueue();
-  const [name, setName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleJoinQueue = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim()) return;
-    
+  const username = user?.username || user?.id;
+
+  const handleJoinQueue = () => {
+    if (!username) return;
     setIsSubmitting(true);
-    joinQueue(name.trim());
+    joinQueue(username);
     setIsSubmitting(false);
   };
 
   const handleLeaveQueue = () => {
+    if (!username) return;
     setIsSubmitting(true);
-    leaveQueue();
+    leaveQueue(username);
     setIsSubmitting(false);
   };
 
@@ -47,40 +40,15 @@ export const QueueActions: React.FC = () => {
         <CardHeader>
           <CardTitle className="text-xl">You're in the Queue</CardTitle>
           <CardDescription>
-            {userPosition === 1 
-              ? "It's your turn now!" 
+            {userPosition === 1
+              ? "It's your turn now!"
               : `Your position: #${userPosition}`}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="notify">Notify me when my position is:</Label>
-            <Select
-              defaultValue={notifyAt.toString()}
-              onValueChange={(value) => setNotificationThreshold(parseInt(value))}
-            >
-              <SelectTrigger id="notify" className="w-full">
-                <SelectValue placeholder="Select when to notify" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="1">When it's my turn</SelectItem>
-                <SelectItem value="2">1 person before me</SelectItem>
-                <SelectItem value="3">2 people before me</SelectItem>
-                <SelectItem value="5">4 people before me</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="relative pt-3">
-            <div className="absolute inset-0 flex items-center px-1">
-              <div className="w-full border-t border-border"></div>
-            </div>
-            <div className="relative flex justify-center">
-              <span className="bg-white px-2 text-xs text-muted-foreground">
-                OR
-              </span>
-            </div>
-          </div>
+          <p className="text-sm text-muted-foreground">
+            You are joined as @{username}.
+          </p>
         </CardContent>
         <CardFooter>
           <Button
@@ -89,12 +57,7 @@ export const QueueActions: React.FC = () => {
             onClick={handleLeaveQueue}
             disabled={isSubmitting}
           >
-            {isSubmitting ? (
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-            ) : (
-              <LogOut className="h-4 w-4 mr-2" />
-            )}
-            Leave Queue
+            {isSubmitting ? "Leaving..." : "Leave Queue"}
           </Button>
         </CardFooter>
       </Card>
@@ -106,54 +69,23 @@ export const QueueActions: React.FC = () => {
       <CardHeader>
         <CardTitle className="text-xl">Join the Queue</CardTitle>
         <CardDescription>
-          Enter your name to reserve your spot
+          You will join as @{username}.
         </CardDescription>
       </CardHeader>
-      <form onSubmit={handleJoinQueue}>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">Your Name</Label>
-            <Input
-              id="name"
-              placeholder="Enter your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="notify">Notify me when my position is:</Label>
-            <Select
-              defaultValue={notifyAt.toString()}
-              onValueChange={(value) => setNotificationThreshold(parseInt(value))}
-            >
-              <SelectTrigger id="notify" className="w-full">
-                <SelectValue placeholder="Select when to notify" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="1">When it's my turn</SelectItem>
-                <SelectItem value="2">1 person before me</SelectItem>
-                <SelectItem value="3">2 people before me</SelectItem>
-                <SelectItem value="5">4 people before me</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </CardContent>
-        <CardFooter>
-          <Button
-            type="submit"
-            className="w-full"
-            disabled={isSubmitting || !name.trim()}
-          >
-            {isSubmitting ? (
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-            ) : (
-              <LogIn className="h-4 w-4 mr-2" />
-            )}
-            Join Queue
-          </Button>
-        </CardFooter>
-      </form>
+      <CardContent className="space-y-4">
+        <p className="text-sm text-muted-foreground">
+          No need to type anything — just click the button below!
+        </p>
+      </CardContent>
+      <CardFooter className="flex flex-col gap-2">
+        <Button
+          className="w-full"
+          onClick={handleJoinQueue}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Joining..." : "Join Queue"}
+        </Button>
+      </CardFooter>
     </Card>
   );
 };
