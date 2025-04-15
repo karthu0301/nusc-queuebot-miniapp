@@ -19,13 +19,15 @@ import { useInitData } from '@vkruglikov/react-telegram-web-app';
 
 export const TelegramWebApp = () => {
   const [user, setUser] = useState<any>(null);
-  const [initData, initDataUnsafe] = useInitData();
+  const [, initDataUnsafe] = useInitData();
 
-  useEffect(() => {
-    if (initData?.user) {
-      setUser(initData.user);
-    }
-  }, [initDataUnsafe]);
+    useEffect(() => {
+      console.log("initDataUnsafe.user:", initDataUnsafe?.user);
+      if (initDataUnsafe?.user) {
+        setUser(initDataUnsafe.user);
+      }
+    }, [initDataUnsafe]);
+
 
   return (
     <QueueProvider>
